@@ -4,9 +4,8 @@
 // known user, order, and a couple of knowledge documents. Setting
 // MONGODB_DB before the agent's getDb() runs routes all reads through the
 // per-test database. The DB is dropped in cleanup.
-
+import { type Db, MongoClient } from 'mongodb';
 import { createHash } from 'node:crypto';
-import { MongoClient, type Db } from 'mongodb';
 
 const FAKE_DIMENSIONS = 1024;
 

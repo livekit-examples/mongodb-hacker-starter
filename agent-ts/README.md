@@ -109,8 +109,8 @@ Every MongoDB read and write in the agent is scoped by `user_id` and `tenant_id`
 
 ```ts
 const meta = ctx.job.metadata ? JSON.parse(ctx.job.metadata) : {};
-const userId = meta.user_id ?? "user_1";
-const tenantId = meta.tenant_id ?? "default";
+const userId = meta.user_id ?? 'user_1';
+const tenantId = meta.tenant_id ?? 'default';
 ```
 
 `main.ts` parses the metadata before `ctx.connect()` so `preloadUser` runs in parallel with the room connection. See the LiveKit [external data guide](https://docs.livekit.io/agents/logic/external-data/) for why this ordering matters.
@@ -119,13 +119,13 @@ The resolved values are also stashed on `ctx.proc.userData` so the shutdown call
 
 ## Collection layout
 
-| Collection | Purpose | Indexes |
-| --- | --- | --- |
-| `users` | User profiles loaded at session start | `user_id` (unique) |
-| `orders` | Sample CRUD target for `lookup_order` | `order_id` (unique), `user_id` |
-| `knowledge` | RAG corpus | `knowledge_embedding_index` ($vectorSearch, 1024 dims, cosine) |
-| `memories` | Agentic memory store | `(user_id, tenant_id, memory_type)` unique; `memories_embedding_index` ($vectorSearch with filter fields); `memories_text_index` ($search on `memory_type` + `content`) |
-| `sessions` | Session reports written by the shutdown callback | `session_id` (unique), `user_id` |
+| Collection  | Purpose                                          | Indexes                                                                                                                                                                 |
+| ----------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `users`     | User profiles loaded at session start            | `user_id` (unique)                                                                                                                                                      |
+| `orders`    | Sample CRUD target for `lookup_order`            | `order_id` (unique), `user_id`                                                                                                                                          |
+| `knowledge` | RAG corpus                                       | `knowledge_embedding_index` ($vectorSearch, 1024 dims, cosine)                                                                                                          |
+| `memories`  | Agentic memory store                             | `(user_id, tenant_id, memory_type)` unique; `memories_embedding_index` ($vectorSearch with filter fields); `memories_text_index` ($search on `memory_type` + `content`) |
+| `sessions`  | Session reports written by the shutdown callback | `session_id` (unique), `user_id`                                                                                                                                        |
 
 ## Customizing for your domain
 
