@@ -79,7 +79,7 @@ The starter ships with two equivalent agent implementations and you can build wi
 pnpm setup                       # installs all three packages and copies .env.local files
 # fill in agent-py/.env.local, agent-ts/.env.local, frontend/.env.local
 # (see "Environment variables" below)
-pnpm agent:py:download-files     # Python: fetches VAD + turn detector models once
+pnpm agent:py:download-files     # Python: pre-fetches any plugin model files once
 pnpm agent:ts:download-files     # Node:   same, for the TS agent (skip if you only run Python)
 pnpm db:init                     # creates Mongo collections and vector search indexes
 pnpm db:seed                     # inserts sample users, orders, and knowledge docs
@@ -136,9 +136,9 @@ pnpm test:agent-ts      # vitest only
 | `pnpm dev:agent-ts`             | `pnpm dev` inside `agent-ts/`                                                         |
 | `pnpm agent:py:console`         | Python console mode; speak to the agent in your terminal                              |
 | `pnpm agent:py:start`           | Python agent in production mode                                                       |
-| `pnpm agent:py:download-files`  | One-time VAD + turn detector model download (Python)                                  |
+| `pnpm agent:py:download-files`  | One-time plugin model file download (Python)                                          |
 | `pnpm agent:ts:start`           | Node agent in production mode                                                         |
-| `pnpm agent:ts:download-files`  | One-time VAD + turn detector model download (Node)                                    |
+| `pnpm agent:ts:download-files`  | One-time plugin model file download (Node)                                            |
 | `pnpm db:init`                  | Creates Mongo collections and vector + text search indexes (`db/indexes.ts`)          |
 | `pnpm db:seed`                  | Inserts sample users, orders, and knowledge docs (`db/seed.ts`, data in `db/lib/data.ts`) |
 | `pnpm build`                    | Production build of the frontend                                                      |

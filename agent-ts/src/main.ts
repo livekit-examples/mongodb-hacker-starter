@@ -5,15 +5,12 @@
 // top: dispatch metadata -> preload -> session -> shutdown report -> greet.
 import {
   type JobContext,
-  type JobProcess,
   ServerOptions,
   cli,
   defineAgent,
   inference,
   voice,
 } from '@livekit/agents';
-import * as livekit from '@livekit/agents-plugin-livekit';
-import * as silero from '@livekit/agents-plugin-silero';
 import { audioEnhancement } from '@livekit/plugins-ai-coustics';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'node:url';
@@ -43,10 +40,6 @@ function safeParseMetadata(raw: string | undefined | null): DispatchMetadata {
 }
 
 export default defineAgent({
-  prewarm: async (proc: JobProcess) => {
-    proc.userData.vad = await silero.VAD.load();
-  },
-
   entry: async (ctx: JobContext) => {
     // Pattern 3 setup: identify the user from agent dispatch metadata so the
     // preload Mongo lookup runs in parallel with the room connection.
@@ -70,10 +63,14 @@ export default defineAgent({
         model: 'cartesia/sonic-3',
         voice: '9626c31c-bec5-4cca-baa8-f8ba9e84c8bc',
       }),
-      turnDetection: new livekit.turnDetector.MultilingualModel(),
-      vad: ctx.proc.userData.vad! as silero.VAD,
-      voiceOptions: {
-        preemptiveGeneration: true,
+      turnHandling: {
+        // LiveKit's audio turn detector: predicts end of turn from the user's
+        // audio (semantics plus intonation and pacing). It's built into the SDK
+        // and AgentSession supplies the VAD it needs automatically.
+        // See https://docs.livekit.io/agents/logic/turns/turn-detector/
+        turnDetection: new inference.TurnDetector(),
+        // Let the LLM start generating while waiting for the end of turn.
+        preemptiveGeneration: { enabled: true },
       },
     });
 
