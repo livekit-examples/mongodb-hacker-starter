@@ -32,7 +32,8 @@ agent-ts/
 
 ## Prerequisites
 
-- Node 22+ and [pnpm](https://pnpm.io/) 10+
+- Node 24+ and [pnpm](https://pnpm.io/) 10+ (the agent runs its TypeScript directly with Node's type stripping; there is no build step)
+- [LiveKit CLI](https://docs.livekit.io/reference/developer-tools/livekit-cli/) 2.19 or later (`lk`)
 - MongoDB Atlas cluster on **MongoDB 8.0 or later** — required for the `$rankFusion` hybrid retrieval pipeline in `tools/memory.searchMemory`. M10+ dedicated clusters run 8.0 by default; check your cluster's server version in the Atlas UI before running `pnpm db:init` if you are on a shared-tier (M0/M2/M5) cluster.
 - LiveKit Cloud project
 - Voyage AI API key — [free tier](https://www.voyageai.com/pricing) covers prototypes
@@ -72,11 +73,10 @@ These scripts live at `../db/indexes.ts` and `../db/seed.ts`; the seed data is i
 ## Run the agent
 
 ```bash
-pnpm dev     # development mode (rebuilds, runs `node dist/main.js dev`)
-pnpm start   # production mode (assumes `pnpm build` already ran)
+pnpm console # speak to it in your terminal (`lk agent console`)
+pnpm dev     # run for use with the frontend (`lk agent dev --deployment local-dev`)
+pnpm start   # production mode (`node src/main.ts start`, what the Dockerfile runs)
 ```
-
-Note: the Node SDK does not have a `console` mode equivalent to the Python `agent.py console`. Use `pnpm dev` and connect with the frontend.
 
 ## Tests
 
@@ -100,8 +100,10 @@ pnpm dev
 
 Both apps share the same LiveKit credentials. The frontend dispatches to whichever agent registers under `AGENT_NAME` (default `my-agent`). This Node agent and the Python sibling at `../agent-py` both register under the name `my-agent`, so **only run one of them at a time**. Either:
 
-- Stop the Python `uv run src/agent.py dev` process before running `pnpm dev` here, or
+- Stop the Python agent's `lk agent dev` process before running `pnpm dev` here, or
 - Change `agentName: "my-agent"` in `src/main.ts` and `AGENT_NAME` in `../frontend/.env.local` to a different name to run them side by side.
+
+`lk agent dev` registers the agent under a [deployment](https://docs.livekit.io/deploy/agents/deployments/), a random `dev-…` name unless you pass one. The frontend's token route dispatches to `AGENT_DEPLOYMENT` (default `local-dev`), which is why `pnpm dev` passes `--deployment local-dev`. For an agent running as production (`pnpm start`, Docker, LiveKit Cloud), set `AGENT_DEPLOYMENT=` (empty) in `../frontend/.env.local`.
 
 ## Who is the user?
 
