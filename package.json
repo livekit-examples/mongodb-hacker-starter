@@ -40,14 +40,14 @@
     "test:agent-ts": "pnpm --dir agent-ts test"
   },
   "devDependencies": {
-    "@types/node": "^22.19.17",
+    "@types/node": "^26.6.6",
     "concurrently": "^10.0.0",
     "dotenv": "^18.0.0",
     "mongodb": "^7.2.0",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "typescript": "^6.0.3"
   },
-  "packageManager": "pnpm@10.34.9",
+  "packageManager": "pnpm@12.18.0",
   "engines": {
     "node": ">=22",
     "pnpm": ">=10.0.0"

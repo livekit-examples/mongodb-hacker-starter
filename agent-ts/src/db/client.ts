@@ -3,8 +3,7 @@
 // A single MongoClient is shared across the agent process. The driver handles
 // pooling and reconnects. Call closeMongoClient() at shutdown to release the
 // pool.
-
-import { MongoClient, type Db } from 'mongodb';
+import { type Db, MongoClient } from 'mongodb';
 
 export const DEFAULT_DB_NAME = 'livekit_mongo_starter';
 

@@ -5,7 +5,6 @@
 // agent has learned for this (user_id, tenant_id) in prior sessions. Both
 // writes land as assistant messages so the LLM sees them before the first
 // reply.
-
 import { llm } from '@livekit/agents';
 import { getDb } from './db/client';
 import { listMemories } from './tools/memory';
@@ -19,10 +18,7 @@ interface UserDoc {
   last_seen_at?: Date;
 }
 
-export async function preloadUser(
-  userId: string,
-  tenantId: string,
-): Promise<llm.ChatContext> {
+export async function preloadUser(userId: string, tenantId: string): Promise<llm.ChatContext> {
   const db = await getDb();
   const now = new Date();
   const user = await db.collection<UserDoc>('users').findOneAndUpdate(
@@ -67,9 +63,7 @@ export async function preloadUser(
 
   const memories = await listMemories(db, userId, tenantId);
   if (memories.length > 0) {
-    const lines = memories
-      .map((m) => `- ${m.memory_type}: ${m.content}`)
-      .join('\n');
+    const lines = memories.map((m) => `- ${m.memory_type}: ${m.content}`).join('\n');
     chatCtx.addMessage({
       role: 'assistant',
       content: `Remembered facts from prior sessions:\n${lines}`,

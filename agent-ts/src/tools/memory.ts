@@ -6,7 +6,6 @@
 // the previous value. Retrieval combines `$vectorSearch` on the `embedding`
 // field and `$search` on `memory_type` + `content` via `$rankFusion`, which
 // is why this module requires MongoDB 8.0 or later.
-
 import type { Db } from 'mongodb';
 import { embedText } from './embeddings';
 
@@ -59,9 +58,7 @@ export async function remember(
     });
   } catch (err) {
     if (!isEmbeddingRateLimited(err)) throw err;
-    console.warn(
-      `embedText rate-limited; storing ${memoryType} without vector`,
-    );
+    console.warn(`embedText rate-limited; storing ${memoryType} without vector`);
   }
   const now = new Date();
   const $set: Record<string, unknown> = { content, updated_at: now };
@@ -76,11 +73,7 @@ export async function remember(
   if ($unset) update.$unset = $unset;
   await db
     .collection('memories')
-    .updateOne(
-      { ...scope(userId, tenantId), memory_type: memoryType },
-      update,
-      { upsert: true },
-    );
+    .updateOne({ ...scope(userId, tenantId), memory_type: memoryType }, update, { upsert: true });
   return `Remembered (${memoryType}): ${content}`;
 }
 
@@ -201,10 +194,7 @@ export async function searchMemory(
     { $limit: limit },
     { $project: { _id: 0, memory_type: 1, content: 1 } },
   ];
-  return db
-    .collection<MemoryResult>('memories')
-    .aggregate<MemoryResult>(pipeline)
-    .toArray();
+  return db.collection<MemoryResult>('memories').aggregate<MemoryResult>(pipeline).toArray();
 }
 
 /** Return every slot stored for this (user_id, tenant_id), newest first. */
