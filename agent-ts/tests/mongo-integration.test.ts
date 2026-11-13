@@ -1,13 +1,11 @@
 // Integration tests for the MongoDB plumbing.
 // Ported from `code/agent/tests/test_mongo_integration.py`.
-
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { fakeVector, isOperationFailure, seededDb, type SeededDbContext } from './setupDb';
+import { type SeededDbContext, fakeVector, isOperationFailure, seededDb } from './setupDb';
 
 vi.mock('../src/tools/embeddings', async () => {
-  const actual = await vi.importActual<typeof import('../src/tools/embeddings')>(
-    '../src/tools/embeddings',
-  );
+  const actual =
+    await vi.importActual<typeof import('../src/tools/embeddings')>('../src/tools/embeddings');
   return {
     ...actual,
     embedText: vi.fn(async (text: string) => fakeVector(text)),
@@ -31,9 +29,7 @@ describeIfDb('MongoDB integration', () => {
 
   function rendered(items: ReadonlyArray<{ content?: unknown }>): string {
     return items
-      .map((i) =>
-        typeof i.content === 'string' ? i.content : JSON.stringify(i.content),
-      )
+      .map((i) => (typeof i.content === 'string' ? i.content : JSON.stringify(i.content)))
       .join(' ');
   }
 
@@ -58,9 +54,7 @@ describeIfDb('MongoDB integration', () => {
     // update_profile. The agent reads this guidance before its first turn.
     const { preloadUser } = await import('../src/preload');
     const chatCtx = await preloadUser('user_unknown_no_name', 'default');
-    const text = rendered(
-      chatCtx.items as ReadonlyArray<{ content?: unknown }>,
-    ).toLowerCase();
+    const text = rendered(chatCtx.items as ReadonlyArray<{ content?: unknown }>).toLowerCase();
     expect(text).toContain('ask');
     expect(text).toContain('name');
     expect(text).toContain('update_profile');
@@ -105,11 +99,7 @@ describeIfDb('MongoDB integration', () => {
   it('search_knowledge_tool_returns_docs', async () => {
     const { vectorSearchKnowledge } = await import('../src/agent');
     try {
-      const results = await vectorSearchKnowledge(
-        ctx.db,
-        'voice agent retrieval',
-        3,
-      );
+      const results = await vectorSearchKnowledge(ctx.db, 'voice agent retrieval', 3);
       expect(Array.isArray(results)).toBe(true);
       for (const doc of results) {
         expect(doc).toHaveProperty('title');
@@ -140,12 +130,8 @@ describeIfDb('MongoDB integration', () => {
 
     expect(await recall(ctx.db, 'user_1', 'default', 'preference')).toBe('likes coffee');
 
-    expect(await forget(ctx.db, 'user_1', 'default', 'preference')).toBe(
-      'Memory forgotten.',
-    );
-    expect(await recall(ctx.db, 'user_1', 'default', 'preference')).toBe(
-      'No memory found.',
-    );
+    expect(await forget(ctx.db, 'user_1', 'default', 'preference')).toBe('Memory forgotten.');
+    expect(await recall(ctx.db, 'user_1', 'default', 'preference')).toBe('No memory found.');
   });
 
   it('pattern_2_memory_isolation_across_users', async () => {

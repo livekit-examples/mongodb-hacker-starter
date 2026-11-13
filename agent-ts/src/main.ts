@@ -3,7 +3,6 @@
 // Mirrors the upstream `agent-starter-node` template scaffold and layers the
 // five MongoDB integration patterns from `code/agent/src/agent.py:346-412` on
 // top: dispatch metadata -> preload -> session -> shutdown report -> greet.
-
 import {
   type JobContext,
   type JobProcess,
@@ -18,8 +17,8 @@ import * as silero from '@livekit/agents-plugin-silero';
 import { audioEnhancement } from '@livekit/plugins-ai-coustics';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'node:url';
-import { closeMongoClient, getDb } from './db/client';
 import { MongoAgent } from './agent';
+import { closeMongoClient, getDb } from './db/client';
 import { preloadUser } from './preload';
 
 dotenv.config({ path: '.env.local' });

@@ -6,19 +6,12 @@
 //   3. Identify + pre-load context         -> preload_user (entrypoint)
 //   4. Function-tool CRUD                  -> @function_tool methods
 //   5. Session report persistence          -> on_session_end
-
 import { llm, voice } from '@livekit/agents';
 import type { Db } from 'mongodb';
 import { z } from 'zod';
 import { getDb } from './db/client';
 import { embedText } from './tools/embeddings';
-import {
-  forget,
-  listMemories,
-  recall,
-  remember,
-  searchMemory,
-} from './tools/memory';
+import { forget, listMemories, recall, remember, searchMemory } from './tools/memory';
 
 // Allow-list for identity fields that `update_profile` can write to the
 // `users` document. Values are dotted paths so nested preferences work
@@ -98,8 +91,7 @@ export class MongoAgent extends voice.Agent {
   private static buildTools(userId: string, tenantId: string) {
     return {
       lookup_order: llm.tool({
-        description:
-          'Look up an order by its ID. Returns items, total, and status.',
+        description: 'Look up an order by its ID. Returns items, total, and status.',
         parameters: z.object({
           order_id: z.string().describe('The order ID to look up.'),
         }),
@@ -133,20 +125,17 @@ export class MongoAgent extends voice.Agent {
           'else you are not confident answering from prior context. Returns ' +
           'a JSON object with a `results` array of `{title, content}`.',
         parameters: z.object({
-          query: z
-            .string()
-            .describe('Natural-language question to search the knowledge base for.'),
+          query: z.string().describe('Natural-language question to search the knowledge base for.'),
         }),
         execute: async ({ query }, { ctx }) => {
-          let statusTimer: ReturnType<typeof setTimeout> | undefined =
-            setTimeout(() => {
-              ctx.session.generateReply({
-                instructions:
-                  `You are searching the knowledge base for '${query}' ` +
-                  'but it is taking a moment. Give the user a brief, ' +
-                  'one-sentence update that you are looking it up.',
-              });
-            }, 500);
+          let statusTimer: ReturnType<typeof setTimeout> | undefined = setTimeout(() => {
+            ctx.session.generateReply({
+              instructions:
+                `You are searching the knowledge base for '${query}' ` +
+                'but it is taking a moment. Give the user a brief, ' +
+                'one-sentence update that you are looking it up.',
+            });
+          }, 500);
           try {
             const db = await getDb();
             const results = await vectorSearchKnowledge(db, query, 3);
@@ -167,11 +156,7 @@ export class MongoAgent extends voice.Agent {
           'profile fields stored on the `users` document and loaded at ' +
           'session start. For anything else, use remember_detail.',
         parameters: z.object({
-          field: z
-            .string()
-            .describe(
-              'One of name, email, preferred_language, timezone.',
-            ),
+          field: z.string().describe('One of name, email, preferred_language, timezone.'),
           value: z.string().describe('The value to store.'),
         }),
         execute: async ({ field, value }) => {
@@ -203,9 +188,7 @@ export class MongoAgent extends voice.Agent {
           "short specific label like 'favorite_color' rather than a generic " +
           "one like 'preferences'.",
         parameters: z.object({
-          memory_type: z
-            .string()
-            .describe('Short label slot, e.g. favorite_color.'),
+          memory_type: z.string().describe('Short label slot, e.g. favorite_color.'),
           content: z.string().describe('The value to remember.'),
         }),
         execute: async ({ memory_type, content }) => {
@@ -216,7 +199,7 @@ export class MongoAgent extends voice.Agent {
 
       recall_detail: llm.tool({
         description:
-          "Return the value stored under memory_type by exact label. " +
+          'Return the value stored under memory_type by exact label. ' +
           "Returns 'No memory found' when the label is not set. Prefer " +
           'search_memories when you are unsure which label stores the fact.',
         parameters: z.object({

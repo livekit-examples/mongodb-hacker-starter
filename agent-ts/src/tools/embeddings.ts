@@ -83,10 +83,7 @@ async function callVoyage(
 }
 
 /** Return a 1024-dimensional embedding for a single text. */
-export async function embedText(
-  text: string,
-  opts: VoyageEmbedOptions = {},
-): Promise<number[]> {
+export async function embedText(text: string, opts: VoyageEmbedOptions = {}): Promise<number[]> {
   const embeddings = await callVoyage([text], opts.inputType);
   if (embeddings.length === 0) {
     throw new Error('Voyage embeddings response did not contain any embeddings.');
