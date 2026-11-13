@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
-    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+    "@trivago/prettier-plugin-sort-imports": "^6.0.0",
     "@types/node": "^22.19.17",
     "eslint": "^9.39.4",
     "globals": "^17.0.0",
@@ -39,7 +39,7 @@
     "@livekit/agents-plugin-livekit": "^1.2.4",
     "@livekit/agents-plugin-silero": "^1.2.4",
     "@livekit/plugins-ai-coustics": "^0.2.10",
-    "dotenv": "^17.4.1",
+    "dotenv": "^18.0.0",
     "mongodb": "^7.2.0",
     "zod": "^4.0.0"
   }
