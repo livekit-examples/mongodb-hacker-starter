@@ -40,7 +40,7 @@
     "test:agent-ts": "pnpm --dir agent-ts test"
   },
   "devDependencies": {
-    "@types/node": "^22.19.17",
+    "@types/node": "^26.0.0",
     "concurrently": "^10.0.0",
     "dotenv": "^18.0.0",
     "mongodb": "^7.2.0",
