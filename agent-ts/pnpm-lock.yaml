@@ -10,16 +10,16 @@ importers:
     dependencies:
       '@livekit/agents':
         specifier: ^1.2.4
-        version: 1.9.5(@livekit/rtc-node@1.2.2)(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7)
+        version: 1.9.5(@livekit/rtc-node@1.2.2)(@types/node@26.6.6)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7)
       '@livekit/agents-plugin-livekit':
         specifier: ^1.2.4
-        version: 1.9.5(@livekit/agents@1.9.5(@livekit/rtc-node@1.2.2)(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7))
+        version: 1.9.5(@livekit/agents@1.9.5(@livekit/rtc-node@1.2.2)(@types/node@26.6.6)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7))
       '@livekit/agents-plugin-silero':
         specifier: ^1.2.4
-        version: 1.9.5(@livekit/agents@1.9.5(@livekit/rtc-node@1.2.2)(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7))(@livekit/rtc-node@1.2.2)
+        version: 1.9.5(@livekit/agents@1.9.5(@livekit/rtc-node@1.2.2)(@types/node@26.6.6)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7))(@livekit/rtc-node@1.2.2)
       '@livekit/plugins-ai-coustics':
         specifier: ^0.3.5
-        version: 0.3.5(@livekit/agents@1.9.5(@livekit/rtc-node@1.2.2)(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7))(@livekit/rtc-node@1.2.2)
+        version: 0.3.5(@livekit/agents@1.9.5(@livekit/rtc-node@1.2.2)(@types/node@26.6.6)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7))(@livekit/rtc-node@1.2.2)
       '@livekit/rtc-node':
         specifier: ^1.2.2
         version: 1.2.2
@@ -40,8 +40,8 @@ importers:
         specifier: ^6.0.0
         version: 6.0.2(prettier@3.10.1)(supports-color@7.2.0)
       '@types/node':
-        specifier: ^22.19.17
-        version: 22.20.5
+        specifier: ^26.6.6
+        version: 26.6.6
       eslint:
         specifier: ^9.39.4
         version: 9.39.5(jiti@2.7.0)(supports-color@7.2.0)
@@ -65,10 +65,10 @@ importers:
         version: 8.72.2(eslint@9.39.5(jiti@2.7.0)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3)
       vite:
         specifier: ^7.3.2
-        version: 7.3.8(@types/node@22.20.5)(jiti@2.7.0)(tsx@4.23.15)
+        version: 7.3.8(@types/node@26.6.6)(jiti@2.7.0)(tsx@4.23.15)
       vitest:
         specifier: ^4.1.4
-        version: 4.1.12(@opentelemetry/api@1.10.0)(@types/node@22.20.5)(vite@7.3.8(@types/node@22.20.5)(jiti@2.7.0)(tsx@4.23.15))
+        version: 4.1.12(@opentelemetry/api@1.10.0)(@types/node@26.6.6)(vite@7.3.8(@types/node@26.6.6)(jiti@2.7.0)(tsx@4.23.15))
 
 packages:
 
@@ -1228,8 +1228,8 @@ packages:
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
 
-  '@types/node@22.20.5':
-    resolution: {integrity: sha512-U2+DNr+wSjpsTS/wZGYHq7GcwfuSmKiKvoPvK22zwTlRhU91yOniN4qRR5KhIjvif7ysw/dz/hKmfDH0Ris4aA==}
+  '@types/node@26.6.6':
+    resolution: {integrity: sha512-MzQj+8Kx3XI40OmUAE6Qoh58ZMNstNNMwn2nfd3qWsfe7nDNSqJNzes4njhz6AHwrSHOffSLwXU6yb474Q4aog==}
 
   '@types/pidusage@2.0.5':
     resolution: {integrity: sha512-MIiyZI4/MK9UGUXWt0jJcCZhVw7YdhBuTOuqP/BjuLDLZ2PmmViMIQgZiWxtaMicQfAz/kMrZ5T7PKxFSkTeUA==}
@@ -2326,8 +2326,8 @@ packages:
   ufo@1.6.4:
     resolution: {integrity: sha512-JFNbkD1Svwe0KvGi8GOeLcP4kAWQ609twvCdcHxq1oSL8svv39ZuSvajcD8B+5D0eL4+s1Is2D/O6KN3qcTeRA==}
 
-  undici-types@6.21.0:
-    resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
+  undici-types@8.9.0:
+    resolution: {integrity: sha512-KTDyRTYX8sWmKXAikPHHSyc63CRPETMctyjKFupcC6OBLXT3xsN0e9aF7m+mIXutFWpUXuedtowG7iLOzp0kQg==}
 
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
@@ -2896,16 +2896,16 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.6.0
 
-  '@livekit/agents-plugin-livekit@1.9.5(@livekit/agents@1.9.5(@livekit/rtc-node@1.2.2)(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7))':
+  '@livekit/agents-plugin-livekit@1.9.5(@livekit/agents@1.9.5(@livekit/rtc-node@1.2.2)(@types/node@26.6.6)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7))':
     dependencies:
       '@huggingface/hub': 2.4.1
       '@huggingface/transformers': 4.2.0
-      '@livekit/agents': 1.9.5(@livekit/rtc-node@1.2.2)(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7)
+      '@livekit/agents': 1.9.5(@livekit/rtc-node@1.2.2)(@types/node@26.6.6)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7)
       onnxruntime-node: 1.24.3
 
-  '@livekit/agents-plugin-silero@1.9.5(@livekit/agents@1.9.5(@livekit/rtc-node@1.2.2)(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7))(@livekit/rtc-node@1.2.2)':
+  '@livekit/agents-plugin-silero@1.9.5(@livekit/agents@1.9.5(@livekit/rtc-node@1.2.2)(@types/node@26.6.6)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7))(@livekit/rtc-node@1.2.2)':
     dependencies:
-      '@livekit/agents': 1.9.5(@livekit/rtc-node@1.2.2)(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7)
+      '@livekit/agents': 1.9.5(@livekit/rtc-node@1.2.2)(@types/node@26.6.6)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7)
       '@livekit/rtc-node': 1.2.2
       onnxruntime-node: 1.24.3
       ws: 8.22.2
@@ -2913,7 +2913,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@livekit/agents@1.9.5(@livekit/rtc-node@1.2.2)(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7)':
+  '@livekit/agents@1.9.5(@livekit/rtc-node@1.2.2)(@types/node@26.6.6)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7)':
     dependencies:
       '@bufbuild/protobuf': 1.10.1
       '@livekit/av': 10.1.0
@@ -2951,7 +2951,7 @@ snapshots:
       pidusage: 4.1.0
       pino: 8.21.0
       pino-pretty: 11.3.0
-      sharp: 0.35.5(@types/node@22.20.5)
+      sharp: 0.35.5(@types/node@26.6.6)
       ws: 8.22.2
       zod: 4.6.7
       zod-to-json-schema: 3.25.2(zod@4.6.7)
@@ -3063,9 +3063,9 @@ snapshots:
   '@livekit/plugins-ai-coustics-x86_64-unknown-linux-gnu@0.3.5':
     optional: true
 
-  '@livekit/plugins-ai-coustics@0.3.5(@livekit/agents@1.9.5(@livekit/rtc-node@1.2.2)(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7))(@livekit/rtc-node@1.2.2)':
+  '@livekit/plugins-ai-coustics@0.3.5(@livekit/agents@1.9.5(@livekit/rtc-node@1.2.2)(@types/node@26.6.6)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7))(@livekit/rtc-node@1.2.2)':
     dependencies:
-      '@livekit/agents': 1.9.5(@livekit/rtc-node@1.2.2)(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7)
+      '@livekit/agents': 1.9.5(@livekit/rtc-node@1.2.2)(@types/node@26.6.6)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7)
       '@livekit/rtc-node': 1.2.2
       '@ubjs/core': 0.31.0-5
       '@ubjs/node': 0.31.0-5
@@ -3409,9 +3409,9 @@ snapshots:
 
   '@types/json-schema@7.0.15': {}
 
-  '@types/node@22.20.5':
+  '@types/node@26.6.6':
     dependencies:
-      undici-types: 6.21.0
+      undici-types: 8.9.0
 
   '@types/pidusage@2.0.5': {}
 
@@ -3558,13 +3558,13 @@ snapshots:
       chai: 6.3.0
       tinyrainbow: 3.2.0
 
-  '@vitest/mocker@4.1.12(vite@7.3.8(@types/node@22.20.5)(jiti@2.7.0)(tsx@4.23.15))':
+  '@vitest/mocker@4.1.12(vite@7.3.8(@types/node@26.6.6)(jiti@2.7.0)(tsx@4.23.15))':
     dependencies:
       '@vitest/spy': 4.1.12
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      vite: 7.3.8(@types/node@22.20.5)(jiti@2.7.0)(tsx@4.23.15)
+      vite: 7.3.8(@types/node@26.6.6)(jiti@2.7.0)(tsx@4.23.15)
 
   '@vitest/pretty-format@4.1.12':
     dependencies:
@@ -4319,7 +4319,7 @@ snapshots:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.2
-      '@types/node': 22.20.5
+      '@types/node': 26.6.6
       long: 5.3.2
 
   pump@3.0.4:
@@ -4438,7 +4438,7 @@ snapshots:
       '@img/sharp-win32-ia32': 0.34.5
       '@img/sharp-win32-x64': 0.34.5
 
-  sharp@0.35.5(@types/node@22.20.5):
+  sharp@0.35.5(@types/node@26.6.6):
     dependencies:
       '@img/colour': 1.1.0
       detect-libc: 2.1.2
@@ -4469,7 +4469,7 @@ snapshots:
       '@img/sharp-win32-arm64': 0.35.5
       '@img/sharp-win32-ia32': 0.35.5
       '@img/sharp-win32-x64': 0.35.5
-      '@types/node': 22.20.5
+      '@types/node': 26.6.6
 
   shebang-command@2.0.0:
     dependencies:
@@ -4576,13 +4576,13 @@ snapshots:
 
   ufo@1.6.4: {}
 
-  undici-types@6.21.0: {}
+  undici-types@8.9.0: {}
 
   uri-js@4.4.1:
     dependencies:
       punycode: 2.3.1
 
-  vite@7.3.8(@types/node@22.20.5)(jiti@2.7.0)(tsx@4.23.15):
+  vite@7.3.8(@types/node@26.6.6)(jiti@2.7.0)(tsx@4.23.15):
     dependencies:
       esbuild: 0.28.2
       fdir: 6.5.0(picomatch@4.0.7)
@@ -4591,15 +4591,15 @@ snapshots:
       rollup: 4.68.2
       tinyglobby: 0.2.17
     optionalDependencies:
-      '@types/node': 22.20.5
+      '@types/node': 26.6.6
       fsevents: 2.3.3
       jiti: 2.7.0
       tsx: 4.23.15
 
-  vitest@4.1.12(@opentelemetry/api@1.10.0)(@types/node@22.20.5)(vite@7.3.8(@types/node@22.20.5)(jiti@2.7.0)(tsx@4.23.15)):
+  vitest@4.1.12(@opentelemetry/api@1.10.0)(@types/node@26.6.6)(vite@7.3.8(@types/node@26.6.6)(jiti@2.7.0)(tsx@4.23.15)):
     dependencies:
       '@vitest/expect': 4.1.12
-      '@vitest/mocker': 4.1.12(vite@7.3.8(@types/node@22.20.5)(jiti@2.7.0)(tsx@4.23.15))
+      '@vitest/mocker': 4.1.12(vite@7.3.8(@types/node@26.6.6)(jiti@2.7.0)(tsx@4.23.15))
       '@vitest/pretty-format': 4.1.12
       '@vitest/runner': 4.1.12
       '@vitest/snapshot': 4.1.12
@@ -4616,11 +4616,11 @@ snapshots:
       tinyexec: 1.3.1
       tinyglobby: 0.2.17
       tinyrainbow: 3.2.0
-      vite: 7.3.8(@types/node@22.20.5)(jiti@2.7.0)(tsx@4.23.15)
+      vite: 7.3.8(@types/node@26.6.6)(jiti@2.7.0)(tsx@4.23.15)
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@opentelemetry/api': 1.10.0
-      '@types/node': 22.20.5
+      '@types/node': 26.6.6
     transitivePeerDependencies:
       - msw
 
