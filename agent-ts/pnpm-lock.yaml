@@ -10,16 +10,19 @@ importers:
     dependencies:
       '@livekit/agents':
         specifier: ^1.2.4
-        version: 1.9.5(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7)
+        version: 1.9.5(@livekit/rtc-node@1.2.2)(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7)
       '@livekit/agents-plugin-livekit':
         specifier: ^1.2.4
-        version: 1.9.5(@livekit/agents@1.9.5(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7))
+        version: 1.9.5(@livekit/agents@1.9.5(@livekit/rtc-node@1.2.2)(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7))
       '@livekit/agents-plugin-silero':
         specifier: ^1.2.4
-        version: 1.9.5(@livekit/agents@1.9.5(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7))
+        version: 1.9.5(@livekit/agents@1.9.5(@livekit/rtc-node@1.2.2)(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7))(@livekit/rtc-node@1.2.2)
       '@livekit/plugins-ai-coustics':
-        specifier: ^0.2.10
-        version: 0.2.15(@livekit/agents@1.9.5(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7))
+        specifier: ^0.3.5
+        version: 0.3.5(@livekit/agents@1.9.5(@livekit/rtc-node@1.2.2)(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7))(@livekit/rtc-node@1.2.2)
+      '@livekit/rtc-node':
+        specifier: ^1.2.2
+        version: 1.2.2
       dotenv:
         specifier: ^18.0.0
         version: 18.0.10
@@ -108,6 +111,9 @@ packages:
 
   '@bufbuild/protobuf@1.10.1':
     resolution: {integrity: sha512-wJ8ReQbHxsAfXhrf9ixl0aYbZorRuOWpBNzm8pL8ftmSxQx/wnJD5Eg861NwJU/czy2VXFIebCeZnZrI9rktIQ==}
+
+  '@datastructures-js/deque@1.0.8':
+    resolution: {integrity: sha512-PSBhJ2/SmeRPRHuBv7i/fHWIdSC3JTyq56qb+Rq0wjOagi0/fdV5/B/3Md5zFZus/W6OkSPMaxMKKMNMrSmubg==}
 
   '@emnapi/runtime@1.11.3':
     resolution: {integrity: sha512-Xz4Tpyki7XyrpbUK1jR1AhdAdaXyhhY4lZ3neLodmhpuWfy2PAQN5B46sAiU4liOXGLkHypn/qU+jvfWSCYYLA==}
@@ -796,48 +802,83 @@ packages:
   '@livekit/mutex@1.1.1':
     resolution: {integrity: sha512-EsshAucklmpuUAfkABPxJNhzj9v2sG7JuzFDL4ML1oJQSV14sqrpTYnsaOudMAw9yOaW53NU3QQTlUQoRs4czw==}
 
-  '@livekit/plugins-ai-coustics-aarch64-apple-darwin@0.2.15':
-    resolution: {integrity: sha512-CLph4IPUmLikIJRUUROaILWtoFwBrh3o/D3VBZpO23gHqUpIWub5DNzq6bAEse4Q+kNMpKzkLjNipEf3QuBbWw==}
-    engines: {node: '>= 18'}
+  '@livekit/plugins-ai-coustics-aarch64-apple-darwin@0.3.5':
+    resolution: {integrity: sha512-PAJvUSMfy0s2EM9xzoGw07tG/DuM1NWs5lu7OMtetkaZOg6ilEYr0ZeaWWqDkj8oVTDSW1e833dTZatAGDT89A==}
     cpu: [arm64]
     os: [darwin]
 
-  '@livekit/plugins-ai-coustics-aarch64-unknown-linux-gnu@0.2.15':
-    resolution: {integrity: sha512-j0nSfMlkjuYQvLClPNbpSydffITGX8EvTrdVXKNPT9PyLdgLdEQO2g3Y3dEtCun95Bo1ySe5h7PmQiVWHk2ahw==}
-    engines: {node: '>= 18'}
+  '@livekit/plugins-ai-coustics-aarch64-unknown-linux-gnu@0.3.5':
+    resolution: {integrity: sha512-eutbmi6SZriZIL9Gf7kQpfUFvrP6ExvP9it+o36TsIqQIcsuQKNCPrYVp+4K+9llNSZ3kB+XMoRkNmBEQmCrYA==}
     cpu: [arm64]
     os: [linux]
 
-  '@livekit/plugins-ai-coustics-x86_64-apple-darwin@0.2.15':
-    resolution: {integrity: sha512-n2fwo3yoUfToZh1qMxBxizxE89Mk75pTAVPQ7oBHq319+EyOY5fweX57BkEWSwgP+rcbcmaJ5MCKGLzCKeZgXA==}
-    engines: {node: '>= 18'}
+  '@livekit/plugins-ai-coustics-x86_64-apple-darwin@0.3.5':
+    resolution: {integrity: sha512-e4AF0GACNRNabczHfPAasoocXgRVnwPo4lNGMuPhNCx8L5HOCFJ7NlwHqqVRmOAwfGmup9W659B9AlxPIZkMvA==}
     cpu: [x64]
     os: [darwin]
 
-  '@livekit/plugins-ai-coustics-x86_64-pc-windows-msvc@0.2.15':
-    resolution: {integrity: sha512-R1uRVf6CCEz79cXn94suiSec3L9su9c6SiP+gsbJzFnbeQUtUIWMN+japIUhH0ZddniWhTcAhGwi9oVSxC9lbA==}
-    engines: {node: '>= 18'}
+  '@livekit/plugins-ai-coustics-x86_64-pc-windows-msvc@0.3.5':
+    resolution: {integrity: sha512-EORnwHEzhNvMCs4AzEv3r8fZoCI2iUtyK77RazovHczfJDcbq/i1POwiAwTuO8PfNlIb4mku6jZSKStrWOT5Ew==}
     cpu: [x64]
     os: [win32]
 
-  '@livekit/plugins-ai-coustics-x86_64-unknown-linux-gnu@0.2.15':
-    resolution: {integrity: sha512-R6O0hYCqRXFfyDZLqIojt8Mdr1TGGs1CsXI1dcqF2egRrW6H2b47bhkcEQZik6PwEBB9V2rAhcnX1H7blUtE7g==}
-    engines: {node: '>= 18'}
+  '@livekit/plugins-ai-coustics-x86_64-unknown-linux-gnu@0.3.5':
+    resolution: {integrity: sha512-1XH0Q/QAfYFS4Kwq5Dqbu1TX+H6DCl4uU4iSI6dyhUmhK3WfFaqfEbd1ZnzesGc8aRisDD2X7cAIKZzmjskzig==}
     cpu: [x64]
     os: [linux]
 
-  '@livekit/plugins-ai-coustics@0.2.15':
-    resolution: {integrity: sha512-o7ieVyJpkTa/ARlsD2aD0rCYSFUaHac2EZovexHIED0IZQEpO0qFiY9BIjY6bMsNPFM7t2uP/E3SkH/YpxD+OA==}
+  '@livekit/plugins-ai-coustics@0.3.5':
+    resolution: {integrity: sha512-SEkH0pDhAQnZL8lC3JSJu+uJ6vpuY2W88D0BTHAoQSRcHB2MqEvdNDX5dWIpfCFpVrsCwe7UBXE/fK0iW2oA+g==}
     engines: {node: '>= 18'}
     peerDependencies:
       '@livekit/agents': ^1.0.43
-      '@livekit/rtc-node': ^0.13.24
+      '@livekit/rtc-node': ^1.1.0
 
   '@livekit/protocol@1.53.0':
     resolution: {integrity: sha512-dM562Q7sEQbJ9ZghjIpcVuRxRApGNwJW/JfXRub+dJT8J1cC2Tep0SyYkDzOawix7+0x969fnjXt0qEZOxkjbQ==}
 
   '@livekit/protocol@1.54.0':
     resolution: {integrity: sha512-981RI+N+cZl52IYIUfW2F2gBLOvPHY2fpROADxJlLLuZ1n/cBZsza142lRpn2U08YLfeI4totefzJuq24+/nIQ==}
+
+  '@livekit/rtc-ffi-bindings-darwin-arm64@0.13.2':
+    resolution: {integrity: sha512-XPdp00ZHM5kiCRdKNxGer5eDrlq1KO4ck7CAisX+fWENUxTXzMhOPzbIxfjH28fMVw24Ajs8ViMJwvIUIKuBQA==}
+    engines: {node: '>= 18'}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@livekit/rtc-ffi-bindings-darwin-x64@0.13.2':
+    resolution: {integrity: sha512-36R0qqV7JeECWPp68uJtHy46gPfDl+xlGabnUiSz2sSutmrjtNK0bTpzX2OgoP7HPqMDep0bBySTnkv/8RCPtg==}
+    engines: {node: '>= 18'}
+    cpu: [x64]
+    os: [darwin]
+
+  '@livekit/rtc-ffi-bindings-linux-arm64-gnu@0.13.2':
+    resolution: {integrity: sha512-flYJL65NG+o1tNisPXY3Mhx0+fGb7DlBgvTaMzwYsc+KHhefEUgIRSSo78JEF/IM1MQVEneLQsGPqXuqEMC3aA==}
+    engines: {node: '>= 18'}
+    cpu: [arm64]
+    os: [linux]
+    libc: [glibc]
+
+  '@livekit/rtc-ffi-bindings-linux-x64-gnu@0.13.2':
+    resolution: {integrity: sha512-acxG8CXMCN4Dgx+nl/1n4CP2G1c8YgmYBs2cA/BpUwYUXsCf9nlnJKRa1i/PIQlTFshdnbgq31RJtz4b3cdGNA==}
+    engines: {node: '>= 18'}
+    cpu: [x64]
+    os: [linux]
+    libc: [glibc]
+
+  '@livekit/rtc-ffi-bindings-win32-x64-msvc@0.13.2':
+    resolution: {integrity: sha512-ho3Q6T5kdvaXEVMvvLl+RmuStlDXzwqg3rY7hm95eZXeRwSCAmkfRz+cHuUDzztCiYNAey4zI1jPkHSRK5lTGg==}
+    engines: {node: '>= 18'}
+    cpu: [x64]
+    os: [win32]
+
+  '@livekit/rtc-ffi-bindings@0.13.2':
+    resolution: {integrity: sha512-0JrZABVvpQt/PcCR51udLxm0JAPF3jt8ncQOBu/H8qlNTLAqW00qTVhYp7hrtJ7REd7MKxIkgv+zThLQVpXXzQ==}
+    engines: {node: '>= 18'}
+
+  '@livekit/rtc-node@1.2.2':
+    resolution: {integrity: sha512-OiSB0d+2xuYarQktFVbVUA0BnhgALEf2Qg52EwNriMGDbua/1Pmw4793+FuN+zTXG0b7ntGFHdy1rRqu0+GHqA==}
+    engines: {node: '>= 18'}
 
   '@livekit/throws-transformer@0.1.8':
     resolution: {integrity: sha512-AaSwQfIaG6YArKOCO+5/DgI8HfL19oHdrkyI0LJJVCqGeZXzPsZIO/Nm/SKUHbT1ERGhF5c34X8CcVWeOePpIQ==}
@@ -1258,6 +1299,56 @@ packages:
     resolution: {integrity: sha512-NAGrjn0Pitjqzq/GkgMC4kBYm233PQ8GffyQ9+kTA3AlNQYEzOf25EIM02BAHZv5FRJSpHpJk+OGUxVkOB93GQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
+  '@ubjs/core@0.31.0-5':
+    resolution: {integrity: sha512-oRBRtyYOhaodiOY3rLMZFgAHGFMmD44XefMpsAx4Ja0/rO+45kVdQB1VZsblQMLYxP965i3IHm56eymgo3I5eQ==}
+
+  '@ubjs/node-darwin-arm64@0.31.0-5':
+    resolution: {integrity: sha512-ZefUcOgW0UkPZe9aav021m1hBfBzzhj75gOS/gc85g2PkmWDctz+D+tKQYs/gwM44vu1We2WTGcitf8yrZJGyA==}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@ubjs/node-darwin-x64@0.31.0-5':
+    resolution: {integrity: sha512-K4A5k8hsLeOtgG4tT73u/XKfxUUOjWxwjRf3e4v3sggG6b7q3yoSFUwPjf12la6VSgD/E9sRjrTAT7MNdENaww==}
+    cpu: [x64]
+    os: [darwin]
+
+  '@ubjs/node-linux-arm64-gnu@0.31.0-5':
+    resolution: {integrity: sha512-m4S96owMdh53G6w6hALi7nfsUhB+Y6bAcjVJnRdzVe5WJ+o2dMTbj9u/IxtcJaENtLLEMDPHhLAZmxQS9Licew==}
+    cpu: [arm64]
+    os: [linux]
+    libc: [glibc]
+
+  '@ubjs/node-linux-arm64-musl@0.31.0-5':
+    resolution: {integrity: sha512-VVkXe8We9ka8FZqJfsbl4DEkbn4nt4htSCd2Vr39L9kOrBtNZ8SR0s+BiMQ8xBQnP6u+O95TrhOviROCDj2VSw==}
+    cpu: [arm64]
+    os: [linux]
+    libc: [musl]
+
+  '@ubjs/node-linux-x64-gnu@0.31.0-5':
+    resolution: {integrity: sha512-xFvl3iGWBVqghmz9lC4qij+ezLHV5V11O/6G+0rM7a/nAQdweCSCeZ65QsiVoqC/bYJ7fKIyKCXFMy5ldhSQvw==}
+    cpu: [x64]
+    os: [linux]
+    libc: [glibc]
+
+  '@ubjs/node-linux-x64-musl@0.31.0-5':
+    resolution: {integrity: sha512-R3HzFVI+v9G5CVOFOSxhF9SYX1o/6llA9mQbaANYMANuybE6LNJ8fgj51CTRrhobjWmgA24swq24DqbVsqypZg==}
+    cpu: [x64]
+    os: [linux]
+    libc: [musl]
+
+  '@ubjs/node-win32-arm64-msvc@0.31.0-5':
+    resolution: {integrity: sha512-A7Z6lYqY0QQF4j3ce/3k1iIjgJIMWje3wTU9RfOTDSl0hcKKHDezvwvLiLBbVjagwJQOKWO5zwWLBAw6KTUDHQ==}
+    cpu: [arm64]
+    os: [win32]
+
+  '@ubjs/node-win32-x64-msvc@0.31.0-5':
+    resolution: {integrity: sha512-rqaH2YZBjUphSV8nFseeTG5vJMToDt8QhoY4wKULGZr2OF/HM52Ggt/9yb+gsuJ1l4ekz2biJrlN/HlhyV3CZw==}
+    cpu: [x64]
+    os: [win32]
+
+  '@ubjs/node@0.31.0-5':
+    resolution: {integrity: sha512-w1gyA/1H7TiJIQfHD6Zjr673IDfG+1a4hpM0f0krxJr9jlTkrwouFCoNTwpLmSxSWJXtUxkB19Bk0ekxAepOHQ==}
+
   '@vitest/expect@4.1.12':
     resolution: {integrity: sha512-vFlTt+YEu9WBpNjdGayNmlMVzrWPi1+sv853/7t2FU7hpO5gAFBKHzQmkCq5Xjpr+evegF2994LQT3hF3mRlqQ==}
 
@@ -1286,76 +1377,6 @@ packages:
 
   '@vitest/utils@4.1.12':
     resolution: {integrity: sha512-Q3awXrwOfEV+qc3WmO5ONyE0yO7Q1gQ9/oyHxGLZ/pl7N3NO/ZztqQwKLuwMkV+CA1JYSIeO3gkHnRDIo4AVaA==}
-
-  '@yuuang/ffi-rs-android-arm64@1.3.7':
-    resolution: {integrity: sha512-t6Wx3Xll6c07Nuk0k3xnZsxKFxlshm92i0U/BiTHc6kQbvu+fMJF+gKsj4yEj886jH51CM3EqZT9Xdhq9CdUVw==}
-    engines: {node: '>= 12'}
-    cpu: [arm64]
-    os: [android]
-
-  '@yuuang/ffi-rs-darwin-arm64@1.3.7':
-    resolution: {integrity: sha512-OueBlUFBT9IwD9pQnoYs0UszRBEySskfrEPXXfvKfGjL/DXnfn6kUheQ3oIP6sSmshVGNQUwrTCPo6feAa4QjA==}
-    engines: {node: '>= 12'}
-    cpu: [arm64]
-    os: [darwin]
-
-  '@yuuang/ffi-rs-darwin-x64@1.3.7':
-    resolution: {integrity: sha512-x4mxXOKwSgwYx6OBAKrW+Ocp8um2KoPpUwaD0Z2tmR6EekoRvFGN7s/eEK1avqCxcsLN7/MzGOnCCFyGpOVfPA==}
-    engines: {node: '>= 12'}
-    cpu: [x64]
-    os: [darwin]
-
-  '@yuuang/ffi-rs-linux-arm-gnueabihf@1.3.7':
-    resolution: {integrity: sha512-9r//Z022QYVoIAY458Dpk8HWkisk/y4NJC3d52RlkdsLD+9p0zn0cKKSoMF/xUsOWDFSmOf+cwU/Xadi/wxFMQ==}
-    engines: {node: '>= 12'}
-    cpu: [arm]
-    os: [linux]
-
-  '@yuuang/ffi-rs-linux-arm64-gnu@1.3.7':
-    resolution: {integrity: sha512-nrW4MlFlyQInfxTsI5wtcIpbV4KlHLWo2BCk4CHIETlUT+PUspNFqDg+Byy7My3hpCZlXp0WsMVP/3N0LlybNw==}
-    engines: {node: '>= 12'}
-    cpu: [arm64]
-    os: [linux]
-    libc: [glibc]
-
-  '@yuuang/ffi-rs-linux-arm64-musl@1.3.7':
-    resolution: {integrity: sha512-eLLx4P8DzNnuPif19nAvKPaf88lSf6KFbDetH3nAIRZvI495h0jigN835Ayr7uAADssohGfO9MPMH33DXmFErA==}
-    engines: {node: '>= 12'}
-    cpu: [arm64]
-    os: [linux]
-    libc: [musl]
-
-  '@yuuang/ffi-rs-linux-x64-gnu@1.3.7':
-    resolution: {integrity: sha512-upEz1Q98T51x2In872fsjgHCJbE3e8r9JxhJD+5NvSMk6BpieYWRodTbsMxV6oKWmfl12loKwF2j4OBSWKl0lA==}
-    engines: {node: '>= 12'}
-    cpu: [x64]
-    os: [linux]
-    libc: [glibc]
-
-  '@yuuang/ffi-rs-linux-x64-musl@1.3.7':
-    resolution: {integrity: sha512-YOcOkIwVvIhpwuGJ428h15vpE0KnT3teFG0g2J31FrBxrVh9IH4HeTGXjelI3l9SI5gyiZDnD4PQnQ1U6oqTcA==}
-    engines: {node: '>= 12'}
-    cpu: [x64]
-    os: [linux]
-    libc: [musl]
-
-  '@yuuang/ffi-rs-win32-arm64-msvc@1.3.7':
-    resolution: {integrity: sha512-ZfYzLV1w7Mhzh9XRScEMpw9oazIEiwO+0+TYHHRL882d5oD0Q99YikmRhdifsoHCCQefKmWF/4BXCeFkzg8NFA==}
-    engines: {node: '>= 12'}
-    cpu: [arm64]
-    os: [win32]
-
-  '@yuuang/ffi-rs-win32-ia32-msvc@1.3.7':
-    resolution: {integrity: sha512-ifYz+f+giKpT39lKWDru+om6QnA9J7J953ns60xHgB46ESZvPd/Y2W5+PesRNC9U+vnFEiLZ9CNC+R3fBWC1pg==}
-    engines: {node: '>= 12'}
-    cpu: [x64, ia32]
-    os: [win32]
-
-  '@yuuang/ffi-rs-win32-x64-msvc@1.3.7':
-    resolution: {integrity: sha512-H3s4wOLtZtKtmuPjUNE+bhnSKxxpXcuxG70jRC8dUMHqIm5iCvdoZ4XYDeq7/uUYlySerXFmRL4dAVCX/TUNTg==}
-    engines: {node: '>= 12'}
-    cpu: [x64]
-    os: [win32]
 
   abort-controller@3.0.0:
     resolution: {integrity: sha512-h8lQ8tacZYnR3vNQTgibj+tODHI5/+l06Au2Pcriv/Gmet0eaj4TwWH41sO9wnHDiQsEj19q0drzdWdeAHtweg==}
@@ -1652,9 +1673,6 @@ packages:
     peerDependenciesMeta:
       picomatch:
         optional: true
-
-  ffi-rs@1.3.7:
-    resolution: {integrity: sha512-5MMZQS2t/6f/ec3sx0f51gBcKGZPGfolPAW04lvLOSYnr7gmOKs8YzH1Rh+34WGO+VtcgcTuxaUUoJLcR4Tirg==}
 
   file-entry-cache@8.0.0:
     resolution: {integrity: sha512-XXTUwCvisa5oacNGRP9SfNtYBNAMi+RPwBFmblZEF7N7swHYQS6/Zfk7SRwx4D5j3CH211YNRco1DEMNVfZCnQ==}
@@ -2311,10 +2329,6 @@ packages:
   undici-types@6.21.0:
     resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
 
-  uniffi-bindgen-react-native@0.29.3-1:
-    resolution: {integrity: sha512-o6gXZsAh55yuvhwF2WSFdIHV4phyfWcCmg4DuyfJWJ7CvUz1UcIz2S4u9SmXAz1jsuqvu6Xc9hexrRBB0a5osg==}
-    hasBin: true
-
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
 
@@ -2502,6 +2516,8 @@ snapshots:
       '@babel/helper-validator-identifier': 7.29.7
 
   '@bufbuild/protobuf@1.10.1': {}
+
+  '@datastructures-js/deque@1.0.8': {}
 
   '@emnapi/runtime@1.11.3':
     dependencies:
@@ -2880,23 +2896,24 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.6.0
 
-  '@livekit/agents-plugin-livekit@1.9.5(@livekit/agents@1.9.5(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7))':
+  '@livekit/agents-plugin-livekit@1.9.5(@livekit/agents@1.9.5(@livekit/rtc-node@1.2.2)(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7))':
     dependencies:
       '@huggingface/hub': 2.4.1
       '@huggingface/transformers': 4.2.0
-      '@livekit/agents': 1.9.5(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7)
+      '@livekit/agents': 1.9.5(@livekit/rtc-node@1.2.2)(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7)
       onnxruntime-node: 1.24.3
 
-  '@livekit/agents-plugin-silero@1.9.5(@livekit/agents@1.9.5(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7))':
+  '@livekit/agents-plugin-silero@1.9.5(@livekit/agents@1.9.5(@livekit/rtc-node@1.2.2)(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7))(@livekit/rtc-node@1.2.2)':
     dependencies:
-      '@livekit/agents': 1.9.5(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7)
+      '@livekit/agents': 1.9.5(@livekit/rtc-node@1.2.2)(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7)
+      '@livekit/rtc-node': 1.2.2
       onnxruntime-node: 1.24.3
       ws: 8.22.2
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
 
-  '@livekit/agents@1.9.5(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7)':
+  '@livekit/agents@1.9.5(@livekit/rtc-node@1.2.2)(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7)':
     dependencies:
       '@bufbuild/protobuf': 1.10.1
       '@livekit/av': 10.1.0
@@ -2904,6 +2921,7 @@ snapshots:
       '@livekit/local-inference': 0.2.7
       '@livekit/mutex': 1.1.1
       '@livekit/protocol': 1.54.0
+      '@livekit/rtc-node': 1.2.2
       '@livekit/throws-transformer': 0.1.8(typescript@6.0.3)
       '@livekit/typed-emitter': 3.0.0
       '@opentelemetry/api': 1.10.0
@@ -3030,34 +3048,35 @@ snapshots:
 
   '@livekit/mutex@1.1.1': {}
 
-  '@livekit/plugins-ai-coustics-aarch64-apple-darwin@0.2.15':
+  '@livekit/plugins-ai-coustics-aarch64-apple-darwin@0.3.5':
     optional: true
 
-  '@livekit/plugins-ai-coustics-aarch64-unknown-linux-gnu@0.2.15':
+  '@livekit/plugins-ai-coustics-aarch64-unknown-linux-gnu@0.3.5':
     optional: true
 
-  '@livekit/plugins-ai-coustics-x86_64-apple-darwin@0.2.15':
+  '@livekit/plugins-ai-coustics-x86_64-apple-darwin@0.3.5':
     optional: true
 
-  '@livekit/plugins-ai-coustics-x86_64-pc-windows-msvc@0.2.15':
+  '@livekit/plugins-ai-coustics-x86_64-pc-windows-msvc@0.3.5':
     optional: true
 
-  '@livekit/plugins-ai-coustics-x86_64-unknown-linux-gnu@0.2.15':
+  '@livekit/plugins-ai-coustics-x86_64-unknown-linux-gnu@0.3.5':
     optional: true
 
-  '@livekit/plugins-ai-coustics@0.2.15(@livekit/agents@1.9.5(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7))':
+  '@livekit/plugins-ai-coustics@0.3.5(@livekit/agents@1.9.5(@livekit/rtc-node@1.2.2)(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7))(@livekit/rtc-node@1.2.2)':
     dependencies:
-      '@livekit/agents': 1.9.5(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7)
-      ffi-rs: 1.3.7
+      '@livekit/agents': 1.9.5(@livekit/rtc-node@1.2.2)(@types/node@22.20.5)(supports-color@7.2.0)(typescript@6.0.3)(zod@4.6.7)
+      '@livekit/rtc-node': 1.2.2
+      '@ubjs/core': 0.31.0-5
+      '@ubjs/node': 0.31.0-5
       pino: 9.13.1
       pino-pretty: 13.2.0
-      uniffi-bindgen-react-native: 0.29.3-1
     optionalDependencies:
-      '@livekit/plugins-ai-coustics-aarch64-apple-darwin': 0.2.15
-      '@livekit/plugins-ai-coustics-aarch64-unknown-linux-gnu': 0.2.15
-      '@livekit/plugins-ai-coustics-x86_64-apple-darwin': 0.2.15
-      '@livekit/plugins-ai-coustics-x86_64-pc-windows-msvc': 0.2.15
-      '@livekit/plugins-ai-coustics-x86_64-unknown-linux-gnu': 0.2.15
+      '@livekit/plugins-ai-coustics-aarch64-apple-darwin': 0.3.5
+      '@livekit/plugins-ai-coustics-aarch64-unknown-linux-gnu': 0.3.5
+      '@livekit/plugins-ai-coustics-x86_64-apple-darwin': 0.3.5
+      '@livekit/plugins-ai-coustics-x86_64-pc-windows-msvc': 0.3.5
+      '@livekit/plugins-ai-coustics-x86_64-unknown-linux-gnu': 0.3.5
 
   '@livekit/protocol@1.53.0':
     dependencies:
@@ -3066,6 +3085,40 @@ snapshots:
   '@livekit/protocol@1.54.0':
     dependencies:
       '@bufbuild/protobuf': 1.10.1
+
+  '@livekit/rtc-ffi-bindings-darwin-arm64@0.13.2':
+    optional: true
+
+  '@livekit/rtc-ffi-bindings-darwin-x64@0.13.2':
+    optional: true
+
+  '@livekit/rtc-ffi-bindings-linux-arm64-gnu@0.13.2':
+    optional: true
+
+  '@livekit/rtc-ffi-bindings-linux-x64-gnu@0.13.2':
+    optional: true
+
+  '@livekit/rtc-ffi-bindings-win32-x64-msvc@0.13.2':
+    optional: true
+
+  '@livekit/rtc-ffi-bindings@0.13.2':
+    dependencies:
+      '@bufbuild/protobuf': 1.10.1
+    optionalDependencies:
+      '@livekit/rtc-ffi-bindings-darwin-arm64': 0.13.2
+      '@livekit/rtc-ffi-bindings-darwin-x64': 0.13.2
+      '@livekit/rtc-ffi-bindings-linux-arm64-gnu': 0.13.2
+      '@livekit/rtc-ffi-bindings-linux-x64-gnu': 0.13.2
+      '@livekit/rtc-ffi-bindings-win32-x64-msvc': 0.13.2
+
+  '@livekit/rtc-node@1.2.2':
+    dependencies:
+      '@datastructures-js/deque': 1.0.8
+      '@livekit/mutex': 1.1.1
+      '@livekit/rtc-ffi-bindings': 0.13.2
+      '@livekit/typed-emitter': 3.0.0
+      pino: 9.13.1
+      pino-pretty: 13.2.0
 
   '@livekit/throws-transformer@0.1.8(typescript@6.0.3)':
     dependencies:
@@ -3459,6 +3512,43 @@ snapshots:
       '@typescript-eslint/types': 8.72.2
       eslint-visitor-keys: 5.0.1
 
+  '@ubjs/core@0.31.0-5': {}
+
+  '@ubjs/node-darwin-arm64@0.31.0-5':
+    optional: true
+
+  '@ubjs/node-darwin-x64@0.31.0-5':
+    optional: true
+
+  '@ubjs/node-linux-arm64-gnu@0.31.0-5':
+    optional: true
+
+  '@ubjs/node-linux-arm64-musl@0.31.0-5':
+    optional: true
+
+  '@ubjs/node-linux-x64-gnu@0.31.0-5':
+    optional: true
+
+  '@ubjs/node-linux-x64-musl@0.31.0-5':
+    optional: true
+
+  '@ubjs/node-win32-arm64-msvc@0.31.0-5':
+    optional: true
+
+  '@ubjs/node-win32-x64-msvc@0.31.0-5':
+    optional: true
+
+  '@ubjs/node@0.31.0-5':
+    optionalDependencies:
+      '@ubjs/node-darwin-arm64': 0.31.0-5
+      '@ubjs/node-darwin-x64': 0.31.0-5
+      '@ubjs/node-linux-arm64-gnu': 0.31.0-5
+      '@ubjs/node-linux-arm64-musl': 0.31.0-5
+      '@ubjs/node-linux-x64-gnu': 0.31.0-5
+      '@ubjs/node-linux-x64-musl': 0.31.0-5
+      '@ubjs/node-win32-arm64-msvc': 0.31.0-5
+      '@ubjs/node-win32-x64-msvc': 0.31.0-5
+
   '@vitest/expect@4.1.12':
     dependencies:
       '@standard-schema/spec': 1.1.0
@@ -3499,39 +3589,6 @@ snapshots:
       '@vitest/pretty-format': 4.1.12
       convert-source-map: 2.0.0
       tinyrainbow: 3.2.0
-
-  '@yuuang/ffi-rs-android-arm64@1.3.7':
-    optional: true
-
-  '@yuuang/ffi-rs-darwin-arm64@1.3.7':
-    optional: true
-
-  '@yuuang/ffi-rs-darwin-x64@1.3.7':
-    optional: true
-
-  '@yuuang/ffi-rs-linux-arm-gnueabihf@1.3.7':
-    optional: true
-
-  '@yuuang/ffi-rs-linux-arm64-gnu@1.3.7':
-    optional: true
-
-  '@yuuang/ffi-rs-linux-arm64-musl@1.3.7':
-    optional: true
-
-  '@yuuang/ffi-rs-linux-x64-gnu@1.3.7':
-    optional: true
-
-  '@yuuang/ffi-rs-linux-x64-musl@1.3.7':
-    optional: true
-
-  '@yuuang/ffi-rs-win32-arm64-msvc@1.3.7':
-    optional: true
-
-  '@yuuang/ffi-rs-win32-ia32-msvc@1.3.7':
-    optional: true
-
-  '@yuuang/ffi-rs-win32-x64-msvc@1.3.7':
-    optional: true
 
   abort-controller@3.0.0:
     dependencies:
@@ -3825,20 +3882,6 @@ snapshots:
   fdir@6.5.0(picomatch@4.0.7):
     optionalDependencies:
       picomatch: 4.0.7
-
-  ffi-rs@1.3.7:
-    optionalDependencies:
-      '@yuuang/ffi-rs-android-arm64': 1.3.7
-      '@yuuang/ffi-rs-darwin-arm64': 1.3.7
-      '@yuuang/ffi-rs-darwin-x64': 1.3.7
-      '@yuuang/ffi-rs-linux-arm-gnueabihf': 1.3.7
-      '@yuuang/ffi-rs-linux-arm64-gnu': 1.3.7
-      '@yuuang/ffi-rs-linux-arm64-musl': 1.3.7
-      '@yuuang/ffi-rs-linux-x64-gnu': 1.3.7
-      '@yuuang/ffi-rs-linux-x64-musl': 1.3.7
-      '@yuuang/ffi-rs-win32-arm64-msvc': 1.3.7
-      '@yuuang/ffi-rs-win32-ia32-msvc': 1.3.7
-      '@yuuang/ffi-rs-win32-x64-msvc': 1.3.7
 
   file-entry-cache@8.0.0:
     dependencies:
@@ -4534,8 +4577,6 @@ snapshots:
   ufo@1.6.4: {}
 
   undici-types@6.21.0: {}
-
-  uniffi-bindgen-react-native@0.29.3-1: {}
 
   uri-js@4.4.1:
     dependencies:
