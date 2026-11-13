@@ -108,10 +108,10 @@ pnpm agent:ts:start     # Node   agent in production mode
 pnpm build              # production build of the Next.js frontend
 pnpm start:frontend     # run the built frontend
 
-pnpm lint               # ruff (agent-py) + eslint (agent-ts) + next lint (frontend), in parallel
+pnpm lint               # ruff (agent-py) + eslint (agent-ts) + eslint (frontend), in parallel
 pnpm lint:agent-py      # ruff check only
 pnpm lint:agent-ts      # eslint only
-pnpm lint:frontend      # next lint only
+pnpm lint:frontend      # eslint only
 pnpm format             # ruff format + prettier (agent-ts) + prettier (frontend)
 
 pnpm test               # runs both pytest (agent-py) and vitest (agent-ts), sequentially
