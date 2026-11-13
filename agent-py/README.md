@@ -8,7 +8,7 @@ A voice AI agent built on the [LiveKit Agents Python starter](https://github.com
 4. **Session report persistence** — write the structured `SessionReport` to MongoDB inside `on_session_end`.
 5. **Agentic memory tools** — `remember_detail`, `recall_detail`, `forget_detail`, `search_memories`, and `list_user_memories` tools backed by a per-user memory store. Memory is modeled as slots (one value per `(user_id, tenant_id, memory_type)`), and retrieval uses `$rankFusion` to combine `$vectorSearch` and `$search` for hybrid semantic + lexical matching.
 
-The voice pipeline uses [LiveKit Inference](https://docs.livekit.io/agents/models/inference/) (Deepgram Nova-3 STT, GPT-5.3 LLM, Cartesia Sonic-3 TTS), the [LiveKit Turn Detector](https://docs.livekit.io/agents/logic/turns/turn-detector/), Silero VAD, and ai-coustics noise cancellation. Embeddings are produced by [Voyage AI](https://www.voyageai.com/) (`voyage-3.5-lite`, 1024 dimensions).
+The voice pipeline uses [LiveKit Inference](https://docs.livekit.io/agents/models/inference/) (Deepgram Nova-3 STT, GPT-5.3 LLM, Cartesia Sonic-3 TTS), the LiveKit [audio turn detector](https://docs.livekit.io/agents/logic/turns/turn-detector/) (built into the SDK; `AgentSession` supplies its VAD), and ai-coustics noise cancellation. Embeddings are produced by [Voyage AI](https://www.voyageai.com/) (`voyage-3.5-lite`, 1024 dimensions).
 
 ## What's in this directory
 
@@ -51,7 +51,7 @@ cd agent
 uv sync
 cp .env.example .env.local
 # fill in LIVEKIT_*, MONGODB_URI, VOYAGE_API_KEY in .env.local
-uv run src/agent.py download-files   # one-time: VAD + turn detector models
+uv run -m livekit.agents download-files   # one-time: plugin model files
 ```
 
 You can populate `LIVEKIT_*` with `lk app env -w -d .env.local` if you've authenticated with `lk cloud auth`.
