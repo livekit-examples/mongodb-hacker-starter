@@ -19,6 +19,12 @@ const API_KEY = process.env.LIVEKIT_API_KEY;
 const API_SECRET = process.env.LIVEKIT_API_SECRET;
 const LIVEKIT_URL = process.env.LIVEKIT_URL;
 const AGENT_NAME = process.env.AGENT_NAME;
+// Deployment the dispatched agent is registered under. `pnpm dev:py` / `pnpm dev:ts`
+// run the agent with `lk agent dev --deployment local-dev`, so that's the default.
+// Set AGENT_DEPLOYMENT= (empty) to dispatch to the production deployment instead,
+// e.g. an agent started with `lk agent start`, from the Docker image, or on LiveKit Cloud.
+// See https://docs.livekit.io/agents/server/agent-dispatch/#deployments
+const AGENT_DEPLOYMENT = process.env.AGENT_DEPLOYMENT ?? 'local-dev';
 
 // Anonymous identity cookie. In production, replace the cookie read below with
 // a real session lookup (NextAuth, Clerk, Supabase, etc.) and fall through to
@@ -66,7 +72,13 @@ export async function POST(req: NextRequest) {
     const metadata = JSON.stringify({ user_id: userId, tenant_id: DEFAULT_TENANT_ID });
     const roomConfig = AGENT_NAME
       ? new RoomConfiguration({
-          agents: [new RoomAgentDispatch({ agentName: AGENT_NAME, metadata })],
+          agents: [
+            new RoomAgentDispatch({
+              agentName: AGENT_NAME,
+              deployment: AGENT_DEPLOYMENT,
+              metadata,
+            }),
+          ],
         })
       : new RoomConfiguration();
 

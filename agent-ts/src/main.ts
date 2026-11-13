@@ -14,9 +14,9 @@ import {
 import { audioEnhancement } from '@livekit/plugins-ai-coustics';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'node:url';
-import { MongoAgent } from './agent';
-import { closeMongoClient, getDb } from './db/client';
-import { preloadUser } from './preload';
+import { MongoAgent } from './agent.ts';
+import { closeMongoClient, getDb } from './db/client.ts';
+import { preloadUser } from './preload.ts';
 
 dotenv.config({ path: '.env.local' });
 

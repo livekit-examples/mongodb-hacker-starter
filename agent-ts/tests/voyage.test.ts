@@ -7,7 +7,7 @@
 // "skip with a log line" so contributors on free tier still see a green
 // suite, while a genuine auth failure (401) still fails the test.
 import { describe, expect, it } from 'vitest';
-import { EMBEDDING_DIMENSIONS, embedText } from '../src/tools/embeddings';
+import { EMBEDDING_DIMENSIONS, embedText } from '../src/tools/embeddings.ts';
 
 describe('Voyage live API', () => {
   it.skipIf(!process.env.VOYAGE_API_KEY)('voyage_returns_correct_dimensions', async (ctx) => {

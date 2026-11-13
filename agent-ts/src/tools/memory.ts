@@ -7,7 +7,7 @@
 // field and `$search` on `memory_type` + `content` via `$rankFusion`, which
 // is why this module requires MongoDB 8.0 or later.
 import type { Db } from 'mongodb';
-import { embedText } from './embeddings';
+import { embedText } from './embeddings.ts';
 
 interface MemoryScope {
   user_id: string;

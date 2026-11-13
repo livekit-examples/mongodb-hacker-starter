@@ -58,6 +58,7 @@ The root `package.json` is a thin script runner backed by [`concurrently`](https
 - Python 3.11+ and [uv](https://docs.astral.sh/uv/) (only required if you run the Python agent)
 - [MongoDB Atlas](https://www.mongodb.com/atlas) cluster on MongoDB 8.0 or later (required for `$rankFusion` in the agentic memory pattern)
 - [LiveKit Cloud](https://cloud.livekit.io) project
+- [LiveKit CLI](https://docs.livekit.io/reference/developer-tools/livekit-cli/) 2.19 or later (`lk`): the dev and console scripts run the agents with `lk agent dev` / `lk agent console`
 - [Voyage AI](https://www.voyageai.com/pricing) API key (free tier is enough for prototyping)
 
 ## Picking a runtime
@@ -67,7 +68,7 @@ The starter ships with two equivalent agent implementations and you can build wi
 | Command          | Agent package | Runtime              | Use when                                                                  |
 | ---------------- | ------------- | -------------------- | ------------------------------------------------------------------------- |
 | `pnpm dev:py`    | `agent-py/`   | Python 3.11+ via uv  | You prefer Python, want full feature parity, or need `agent:py:console`   |
-| `pnpm dev:ts`    | `agent-ts/`   | Node 22+ via pnpm    | You prefer TypeScript or are deploying alongside other Node services      |
+| `pnpm dev:ts`    | `agent-ts/`   | Node 24+ via pnpm    | You prefer TypeScript or are deploying alongside other Node services      |
 
 > **Only run one runtime at a time.** Both register under the same `AGENT_NAME` (`my-agent` by default), so the LiveKit dispatch will route to whichever one connects first. To run them side-by-side for comparison, change `agent_name` in one of them and the matching `AGENT_NAME` in `frontend/.env.local`.
 
@@ -95,7 +96,8 @@ pnpm dev:ts             # Node   agent (dev mode) + frontend together
 pnpm dev:frontend       # just the Next.js app
 pnpm dev:agent-py       # just the Python agent in dev mode
 pnpm dev:agent-ts       # just the Node agent in dev mode
-pnpm agent:py:console   # speak to the Python agent in your terminal (Node has no console mode)
+pnpm agent:py:console   # speak to the Python agent in your terminal (lk agent console)
+pnpm agent:ts:console   # same, for the Node agent
 pnpm agent:py:start     # Python agent in production mode
 pnpm agent:ts:start     # Node   agent in production mode
 ```
@@ -132,12 +134,13 @@ pnpm test:agent-ts      # vitest only
 | `pnpm dev:py`                   | Python agent (dev) + frontend together with labeled logs                              |
 | `pnpm dev:ts`                   | Node agent (dev) + frontend together with labeled logs                                |
 | `pnpm dev:frontend`             | `pnpm dev` inside `frontend/`                                                         |
-| `pnpm dev:agent-py`             | `uv run src/agent.py dev` inside `agent-py/`                                          |
-| `pnpm dev:agent-ts`             | `pnpm dev` inside `agent-ts/`                                                         |
-| `pnpm agent:py:console`         | Python console mode; speak to the agent in your terminal                              |
-| `pnpm agent:py:start`           | Python agent in production mode                                                       |
+| `pnpm dev:agent-py`             | `lk agent dev --deployment local-dev` inside `agent-py/`                              |
+| `pnpm dev:agent-ts`             | `pnpm dev` inside `agent-ts/` (`lk agent dev --deployment local-dev`)                 |
+| `pnpm agent:py:console`         | `lk agent console`: speak to the Python agent in your terminal                        |
+| `pnpm agent:py:start`           | Python agent in production mode (`python -m livekit.agents start src/agent.py`)       |
 | `pnpm agent:py:download-files`  | One-time plugin model file download (Python)                                          |
-| `pnpm agent:ts:start`           | Node agent in production mode                                                         |
+| `pnpm agent:ts:console`         | `lk agent console`: speak to the Node agent in your terminal                          |
+| `pnpm agent:ts:start`           | Node agent in production mode (`node src/main.ts start`)                              |
 | `pnpm agent:ts:download-files`  | One-time plugin model file download (Node)                                            |
 | `pnpm db:init`                  | Creates Mongo collections and vector + text search indexes (`db/indexes.ts`)          |
 | `pnpm db:seed`                  | Inserts sample users, orders, and knowledge docs (`db/seed.ts`, data in `db/lib/data.ts`) |
@@ -153,7 +156,7 @@ Three `.env.local` files, one per package. `pnpm env:copy` (run by `pnpm setup`)
 
 - [`agent-py/.env.example`](./agent-py/.env.example) covers `LIVEKIT_URL`, `LIVEKIT_API_KEY`, `LIVEKIT_API_SECRET`, `MONGODB_URI`, `MONGODB_DB` (optional), `VOYAGE_API_KEY`.
 - [`agent-ts/.env.example`](./agent-ts/.env.example) covers the same set as `agent-py/.env.example`.
-- [`frontend/.env.example`](./frontend/.env.example) covers `LIVEKIT_URL`, `LIVEKIT_API_KEY`, `LIVEKIT_API_SECRET`, `AGENT_NAME`, and two sandbox-only vars.
+- [`frontend/.env.example`](./frontend/.env.example) covers `LIVEKIT_URL`, `LIVEKIT_API_KEY`, `LIVEKIT_API_SECRET`, `AGENT_NAME`, `AGENT_DEPLOYMENT`, and two sandbox-only vars.
 
 The `LIVEKIT_*` credentials must match across all three files. If you have the LiveKit CLI installed, `lk app env -w -d agent-py/.env.local` populates the LiveKit block (run it once per agent package).
 
@@ -161,16 +164,18 @@ The `LIVEKIT_*` credentials must match across all three files. If you have the L
 
 The frontend dispatches to the agent registered as `my-agent`. Both [`agent-py/src/agent.py`](./agent-py/src/agent.py) and [`agent-ts/src/main.ts`](./agent-ts/src/main.ts) register under that name, so only the runtime you started with `pnpm dev:py` or `pnpm dev:ts` will pick up jobs. To change the dispatch target, update `agent_name` (Python) or `agentName` (TS) along with `AGENT_NAME` in `frontend/.env.local`. Leaving `AGENT_NAME` blank enables automatic dispatch instead of named dispatch.
 
+`lk agent dev` registers the agent under a [deployment](https://docs.livekit.io/deploy/agents/deployments/) so a local worker never takes jobs meant for production; left to itself it picks a random `dev-…` name, which a token minted by the frontend couldn't target. The dev scripts pin it to `local-dev` (`lk agent dev --deployment local-dev`), and the frontend token route puts the same name on its agent dispatch (`AGENT_DEPLOYMENT`, default `local-dev`). If you run the agent another way (`lk agent start`, the Docker image, or LiveKit Cloud), it registers as production: set `AGENT_DEPLOYMENT=` (empty) in `frontend/.env.local`.
+
 ## Who is the user?
 
 The agent uses two fields to scope every MongoDB read and write: `user_id` and `tenant_id`. The token route owns them and ships them to the agent through [agent dispatch metadata](https://docs.livekit.io/agents/server/agent-dispatch/):
 
 1. [`app/api/token/route.ts`](./frontend/app/api/token/route.ts) reads an httpOnly cookie named `lk_mongo_user_cookie`. On first visit it mints one with `crypto.randomUUID()` and sets it on the response.
-2. The same route builds a `RoomConfiguration` with `agents: [new RoomAgentDispatch({ agentName, metadata })]` where `metadata` is the JSON-stringified `{ user_id, tenant_id }`. Any `room_config` the client sent in the request body is ignored.
+2. The same route builds a `RoomConfiguration` with `agents: [new RoomAgentDispatch({ agentName, deployment, metadata })]` where `metadata` is the JSON-stringified `{ user_id, tenant_id }`. Any `room_config` the client sent in the request body is ignored.
 3. [`components/app/app.tsx`](./frontend/components/app/app.tsx) uses `TokenSource.endpoint('/api/token')`. Same-origin `fetch` auto-attaches cookies, so no client-side code touches the id.
 4. On the agent side, `my_agent` in [`src/agent.py`](./agent-py/src/agent.py) parses `ctx.job.metadata` before `ctx.connect()` so `preload_user` can run in parallel with the room connection.
 
-Console mode (`pnpm agent:py:console`, Python only) has no frontend, so the agent falls back to `DEFAULT_USER_ID = "user_1"` and the seeded profile in [`db/lib/data.ts`](./db/lib/data.ts).
+Console mode (`pnpm agent:py:console` / `pnpm agent:ts:console`) has no frontend, so the agent falls back to `DEFAULT_USER_ID = "user_1"` and the seeded profile in [`db/lib/data.ts`](./db/lib/data.ts).
 
 This is anonymous identity, not authentication. Clearing the cookie produces a new id and a new user profile on the agent side. For production, replace the `req.cookies.get(COOKIE_NAME)` block in `app/api/token/route.ts` with your session lookup (NextAuth, Clerk, Supabase, Better-Auth) and fall through to the anonymous cookie only for guests. The frontend and agent stay the same.
 

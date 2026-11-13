@@ -6,8 +6,8 @@
 // writes land as assistant messages so the LLM sees them before the first
 // reply.
 import { llm } from '@livekit/agents';
-import { getDb } from './db/client';
-import { listMemories } from './tools/memory';
+import { getDb } from './db/client.ts';
+import { listMemories } from './tools/memory.ts';
 
 interface UserDoc {
   user_id: string;

@@ -1,7 +1,7 @@
 // Integration tests for the MongoDB plumbing.
 // Ported from `code/agent/tests/test_mongo_integration.py`.
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { type SeededDbContext, fakeVector, isOperationFailure, seededDb } from './setupDb';
+import { type SeededDbContext, fakeVector, isOperationFailure, seededDb } from './setupDb.ts';
 
 vi.mock('../src/tools/embeddings', async () => {
   const actual =

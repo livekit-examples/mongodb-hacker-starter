@@ -31,6 +31,7 @@ agent-py/
 ## Prerequisites
 
 - Python 3.11+ and [uv](https://docs.astral.sh/uv/)
+- [LiveKit CLI](https://docs.livekit.io/reference/developer-tools/livekit-cli/) 2.19 or later (`lk`)
 - MongoDB Atlas cluster on **MongoDB 8.0 or later** — required for the `$rankFusion` hybrid retrieval pipeline in `tools/memory.search_memory`. M10+ dedicated clusters run 8.0 by default; check your cluster's server version in the Atlas UI before running `db/indexes.py` if you are on a shared-tier (M0/M2/M5) cluster.
 - LiveKit Cloud project
 - Voyage AI API key — [free tier](https://www.voyageai.com/pricing) covers prototypes
@@ -70,9 +71,9 @@ These scripts live at `../db/indexes.ts` and `../db/seed.ts`; the seed data is i
 ## Run the agent
 
 ```bash
-uv run src/agent.py console     # speak to it in your terminal
-uv run src/agent.py dev         # run for use with a frontend
-uv run src/agent.py start       # production mode
+lk agent console                             # speak to it in your terminal
+lk agent dev --deployment local-dev          # run for use with the frontend (see below)
+uv run -m livekit.agents start src/agent.py  # production mode (what the Dockerfile runs)
 ```
 
 ## Tests
@@ -95,6 +96,8 @@ pnpm dev
 
 Both apps share the same LiveKit credentials. The frontend dispatches to the agent registered as `my-agent`. To use a different name, update `agent_name="my-agent"` in `src/agent.py` and `AGENT_NAME` in `../frontend/.env.local`.
 
+`lk agent dev` registers the agent under a [deployment](https://docs.livekit.io/deploy/agents/deployments/), a random `dev-…` name unless you pass one. The frontend's token route dispatches to `AGENT_DEPLOYMENT` (default `local-dev`), so run the agent with `--deployment local-dev` (as `pnpm dev:agent-py` in the repo root does). For an agent running as production (`start`, Docker, LiveKit Cloud), set `AGENT_DEPLOYMENT=` (empty) in `../frontend/.env.local`.
+
 ## Who is the user?
 
 Every MongoDB read and write in the agent is scoped by `user_id` and `tenant_id`. The Next.js token route mints a server-minted httpOnly cookie on first visit, stamps the id onto [agent dispatch metadata](https://docs.livekit.io/agents/server/agent-dispatch/), and LiveKit forwards the metadata string to `ctx.job.metadata`:
@@ -109,7 +112,7 @@ tenant_id = meta.get("tenant_id", DEFAULT_TENANT_ID)
 
 The resolved values are also stashed on `ctx.proc.userdata` so `on_session_end` can write the session report under the correct user id.
 
-Console mode (`uv run src/agent.py console`) has no frontend, so both fields fall back to the `DEFAULT_*` constants and the seeded `user_1` profile.
+Console mode (`lk agent console`) has no frontend, so both fields fall back to the `DEFAULT_*` constants and the seeded `user_1` profile.
 
 ## Collection layout
 
