@@ -1,0 +1,11 @@
+# pnpm 11+ fails installs on unreviewed dependency build scripts (strictDepBuilds).
+# Kept disabled, as they effectively were under pnpm 10: these packages ship
+# prebuilt binaries (or are optional tooling), and the agent and its Docker image
+# work without running their install scripts.
+allowBuilds:
+  '@livekit/blingfire': false
+  '@livekit/local-inference': false
+  esbuild: false
+  onnxruntime-node: false
+  protobufjs: false
+  sharp: false
